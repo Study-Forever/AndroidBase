@@ -1,0 +1,77 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+}
+
+android {
+    namespace 'com.base.library'
+    compileSdk rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdk rootProject.ext.minSdk
+        targetSdk rootProject.ext.targetSdk
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            debuggable false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    buildFeatures {
+        viewBinding true
+        buildConfig true
+    }
+}
+
+dependencies {
+    api libs.material
+    api libs.androidx.activity
+    api libs.androidx.constraintlayout
+    api libs.androidx.appcompat
+    api libs.androidx.core.ktx
+    api libs.androidx.lifecycle.runtime.ktx
+    api libs.androidx.viewpager2
+
+    // Lifecycle (ViewModel & LiveData)
+    api libs.lifecycle.viewmodel
+    api libs.lifecycle.livedata
+
+    // OkHttp
+    api libs.okhttp
+    api libs.okhttp.logging.interceptor
+
+    // Retrofit
+    api libs.retrofit
+    api libs.retrofit.gson
+
+    // Coroutines
+    api libs.coroutines.android
+
+    // DataStore
+    api libs.datastore.preferences
+    api libs.datastore.core
+
+    // Glide
+    api libs.glide
+    //noinspection KaptUsageInsteadOfKsp
+    kapt libs.glide.compiler
+
+    // Banner
+    api libs.banner
+}
