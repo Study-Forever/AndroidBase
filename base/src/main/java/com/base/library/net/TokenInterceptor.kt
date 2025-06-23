@@ -1,6 +1,5 @@
 package com.base.library.net
 
-import com.base.library.utils.DataStoreKey
 import com.base.library.utils.DatastoreUtil
 import com.base.library.utils.Global
 import okhttp3.Interceptor
@@ -34,7 +33,7 @@ class TokenInterceptor : Interceptor {
         if (Global.token.isNotEmpty()) {
             return Global.token
         } else {
-            val token = DatastoreUtil.read(DataStoreKey.TOKEN, "")
+            val token = DatastoreUtil.read("token", "")
             if (token.isNotEmpty()) {
                 Global.token = token
                 return token
