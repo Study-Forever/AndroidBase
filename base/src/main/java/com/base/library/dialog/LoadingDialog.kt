@@ -3,9 +3,9 @@ package com.base.library.dialog
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
+import androidx.core.graphics.drawable.toDrawable
 import com.base.library.R
 import com.base.library.databinding.DialogLoadingBinding
 import com.base.library.utils.gone
@@ -25,7 +25,7 @@ class LoadingDialog(context: Context) : Dialog(context, R.style.CustomDialogThem
         binding = DialogLoadingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
         window?.setDimAmount(0.6f) // Background dimming
 
         binding.apply {

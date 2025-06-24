@@ -1,5 +1,6 @@
 package com.base.library.net
 
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,17 +10,20 @@ object RetrofitClientFactory {
 
     private var retrofitClient: Retrofit? = null
 
-    fun get(baseUrl: String): Retrofit {
-        return retrofitClient ?: createRetrofit(baseUrl)
+    fun create(baseUrl: String, interceptors: List<Interceptor> = emptyList()): Retrofit {
+        return retrofitClient ?: createRetrofit(baseUrl, interceptors)
     }
 
-    private fun createRetrofit(baseUrl: String) : Retrofit {
+    private fun createRetrofit(
+        baseUrl: String,
+        interceptors: List<Interceptor> = emptyList()
+    ): Retrofit {
         retrofitClient = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(
                 OkHttpClient
                     .Builder()
-                    .addInterceptor(TokenInterceptor())
+                    .apply { interceptors.forEach { addInterceptor(it) } }
                     .addInterceptor(HttpLoggingInterceptor().apply {
                         setLevel(HttpLoggingInterceptor.Level.BODY)
                     })
