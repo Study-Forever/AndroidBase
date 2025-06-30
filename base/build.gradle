@@ -51,6 +51,9 @@ dependencies {
     // Lifecycle (ViewModel & LiveData)
     api libs.lifecycle.viewmodel
     api libs.lifecycle.livedata
+    api libs.androidx.navigation.fragment.ktx
+    api libs.androidx.navigation.ui.ktx
+    api libs.androidx.lifecycle.viewmodel.android
 
     // OkHttp
     api libs.okhttp
