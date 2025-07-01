@@ -1,6 +1,7 @@
 package com.base.library.components
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,12 +11,15 @@ abstract class BaseRVAdapter<T, VB : ViewBinding>(
     private val items: MutableList<T> = mutableListOf()
 ) : RecyclerView.Adapter<BaseRVAdapter<T, VB>.BaseViewHolder>() {
 
+    lateinit var context: Context
+
     abstract fun bind(binding: VB, item: T, position: Int)
 
     abstract fun createBinding(inflater: LayoutInflater, parent: ViewGroup): VB
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
+        context = parent.context
+        val inflater = LayoutInflater.from(context)
         val binding = createBinding(inflater, parent)
         return BaseViewHolder(binding)
     }
