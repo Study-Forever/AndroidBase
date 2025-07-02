@@ -34,7 +34,7 @@ open class BaseFragment<VB : ViewBinding> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initLoadingDialog()
-        extractIntent()
+        extractArguments()
         initView(view)
         initData()
     }
@@ -43,7 +43,7 @@ open class BaseFragment<VB : ViewBinding> : Fragment() {
         loadingDialog = LoadingDialog(requireContext())
     }
 
-    open fun extractIntent() {}
+    open fun extractArguments() {}
 
     open fun initView(view: View) {}
 
