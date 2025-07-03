@@ -35,7 +35,7 @@ open class BaseFragment<VB : ViewBinding> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initLoadingDialog()
         extractArguments()
-        initView(view)
+        initView()
         initData()
     }
 
@@ -45,7 +45,7 @@ open class BaseFragment<VB : ViewBinding> : Fragment() {
 
     open fun extractArguments() {}
 
-    open fun initView(view: View) {}
+    open fun initView() {}
 
     open fun initData() {}
 
