@@ -5,6 +5,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
@@ -56,7 +57,20 @@ object ImageLoader {
     fun simpleLoad(url: String, imageView: ImageView) {
         Glide.with(imageView)
             .load(url)
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
+            .into(imageView)
+    }
+
+    fun loadRoundedImage(imageView: ImageView, url: String, corners: Int) {
+        Glide.with(imageView)
+            .load(url)
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(corners)))
+            .into(imageView)
+    }
+
+    fun loadCircleImage(url: String, imageView: ImageView) {
+        Glide.with(imageView)
+            .load(url)
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
             .into(imageView)
     }
 }
