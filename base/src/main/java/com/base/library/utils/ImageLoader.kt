@@ -12,7 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 
 object ImageLoader {
 
-    fun loadImage(
+    fun loadWithCallback(
         url: String,
         imageView: ImageView,
         successCallback: VoidCallBack? = null,
