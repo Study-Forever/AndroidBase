@@ -3,17 +3,9 @@ package com.base.library.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.res.ResourcesCompat
-import com.base.library.BuildConfig
-
-inline fun logger(tag: String, throwable: Throwable? = null, block: () -> String) {
-    BuildConfig.DEBUG.takeIf { it }?.let {
-        Log.e(tag, block(), throwable)
-    }
-}
 
 fun Activity?.isKeepLive(): Boolean {
     this ?: return false

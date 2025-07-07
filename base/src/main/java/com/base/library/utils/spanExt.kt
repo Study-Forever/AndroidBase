@@ -4,7 +4,9 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
+import android.text.style.StrikethroughSpan
 import android.text.style.StyleSpan
+import android.text.style.UnderlineSpan
 
 /**
  * 构建多样式文本的方法
@@ -47,6 +49,26 @@ fun buildStyledText(parts: List<StyledTextPart>): SpannableStringBuilder {
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
+
+        // 设置删除线
+        if (part.deleteLine) {
+            spannableBuilder.setSpan(
+                StrikethroughSpan(),
+                start,
+                spannableBuilder.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+
+        // 设置下划线
+        if (part.underline) {
+            spannableBuilder.setSpan(
+                UnderlineSpan(),
+                start,
+                spannableBuilder.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
     }
 
     return spannableBuilder
@@ -64,5 +86,7 @@ data class StyledTextPart(
     val text: String,
     val color: Int? = null,
     val size: Int? = null,
-    val style: Int? = null
+    val style: Int? = null,
+    val deleteLine: Boolean = false,
+    val underline: Boolean = false
 )
