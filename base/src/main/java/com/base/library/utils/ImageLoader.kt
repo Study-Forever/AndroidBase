@@ -60,7 +60,7 @@ object ImageLoader {
             .into(imageView)
     }
 
-    fun loadRoundedImage(imageView: ImageView, url: String, corners: Int) {
+    fun loadRoundedImage(url: String, corners: Int, imageView: ImageView) {
         Glide.with(imageView)
             .load(url)
             .apply(RequestOptions.bitmapTransform(RoundedCorners(corners)))

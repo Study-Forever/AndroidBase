@@ -7,7 +7,10 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.fragment.app.Fragment
 
-inline fun <reified T : Any> Context.startActivityExt(option: Bundle? = null, finishSelf: Boolean = false) {
+inline fun <reified T : Any> Context.startActivityExt(
+    option: Bundle? = null,
+    finishSelf: Boolean = false
+) {
     val intent = Intent(this, T::class.java).apply {
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
@@ -22,7 +25,10 @@ inline fun <reified T : Any> Context.startActivityExt(option: Bundle? = null, fi
 }
 
 
-inline fun <reified T : Any> Fragment.startActivityExt(option: Bundle? = null, finishSelf: Boolean = false) {
+inline fun <reified T : Any> Fragment.startActivityExt(
+    option: Bundle? = null,
+    finishSelf: Boolean = false
+) {
     val intent = Intent(requireContext(), T::class.java)
     if (option == null)
         startActivity(intent)
@@ -32,16 +38,4 @@ inline fun <reified T : Any> Fragment.startActivityExt(option: Bundle? = null, f
     if (finishSelf) {
         activity?.finish()
     }
-}
-
-fun Activity.getScreenWidth(): Int {
-    val displayMetrics = DisplayMetrics()
-    windowManager.defaultDisplay.getMetrics(displayMetrics)
-    return displayMetrics.widthPixels
-}
-
-fun Activity.getScreenHeight(): Int {
-    val displayMetrics = DisplayMetrics()
-    windowManager.defaultDisplay.getMetrics(displayMetrics)
-    return displayMetrics.heightPixels
 }
