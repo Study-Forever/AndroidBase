@@ -5,7 +5,9 @@ import com.base.library.utils.logger
 sealed class ApiResult<out T> {
     data class Success<T>(val data: T) : ApiResult<T>()
     data class Error(val code: Int, val message: String) : ApiResult<Nothing>()
-    data class NoData(val code: Int) : ApiResult<Nothing>()
+
+    //这是一种特殊的成功状态，用于处理data是null的情况
+    data object Empty : ApiResult<Nothing>()
     data object Loading : ApiResult<Nothing>()
 }
 
