@@ -75,6 +75,6 @@ dependencies {
     //noinspection KaptUsageInsteadOfKsp
     kapt libs.glide.compiler
 
-    // Banner
-    api libs.banner
+    // Room
+    api libs.androidx.room.runtime.android
 }
