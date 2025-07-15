@@ -21,4 +21,11 @@ object DateTimeUtil {
         val minutes = (seconds % 3600) / 60
         return "${hours}小时${minutes}分"
     }
+
+    fun formatTime2MS(millis: Int): String {
+        val seconds = millis / 1000
+        val minutes = seconds / 60
+        val remainingSeconds = seconds % 60
+        return String.format(locale = Locale.getDefault(), "%02d:%02d", minutes, remainingSeconds)
+    }
 }
