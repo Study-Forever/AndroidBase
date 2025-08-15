@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.base.library.dialog.LoadingDialog
 import com.base.library.utils.ViewBindingUtil
+import com.base.library.utils.safeDismiss
+import com.base.library.utils.safeShow
 
 open class BaseFragment<VB : ViewBinding> : Fragment() {
     private var _binding: VB? = null
     val binding: VB get() = _binding!!
-    lateinit var loadingDialog: LoadingDialog
+    private lateinit var loadingDialog: LoadingDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +43,14 @@ open class BaseFragment<VB : ViewBinding> : Fragment() {
 
     private fun initLoadingDialog() {
         loadingDialog = LoadingDialog(requireContext())
+    }
+
+    fun showLoadingDialog() {
+        loadingDialog.safeShow()
+    }
+
+    fun dismissLoadingDialog() {
+        loadingDialog.safeDismiss()
     }
 
     open fun extractArguments() {}
