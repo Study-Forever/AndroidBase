@@ -8,7 +8,6 @@ sealed class ApiResult<out T> {
 
     //这是一种特殊的成功状态，用于处理data是null的情况
     data object Empty : ApiResult<Nothing>()
-    data object Loading : ApiResult<Nothing>()
 }
 
 suspend fun <T> safeApiCall(call: suspend () -> IApiResponse<T>): ApiResult<T> {
@@ -16,7 +15,7 @@ suspend fun <T> safeApiCall(call: suspend () -> IApiResponse<T>): ApiResult<T> {
         val response = call()
         response.toResult()
     } catch (e: Exception) {
-        logger("LogInterceptor") { "网络请求出错：${e.localizedMessage ?: "Unknown error"}" }
+        logger("LogInterceptor") { "Net error：${e.localizedMessage ?: "Unknown error"}" }
         ApiResult.Error(0, e.localizedMessage ?: "Unknown error")
     }
 }
