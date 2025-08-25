@@ -1,7 +1,10 @@
 package com.base.library.components
 
 import android.graphics.Color
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.MotionEvent
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -10,6 +13,7 @@ import androidx.core.view.updatePadding
 import androidx.viewbinding.ViewBinding
 import com.base.library.dialog.LoadingDialog
 import com.base.library.utils.ViewBindingUtil
+import com.base.library.utils.hideKeyboard
 import com.base.library.utils.safeDismiss
 import com.base.library.utils.safeShow
 
@@ -75,6 +79,26 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     open fun initView() {}
     open fun initData() {}
 
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        // 处理触摸事件的主要逻辑
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            // 获取当前获得焦点的 View
+            val v = currentFocus
+            if (v is EditText) {
+                // 获取 EditText 的位置坐标
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                // 如果触摸点不在 EditText 区域内，则隐藏键盘
+                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+                    // 先失去焦点，再隐藏键盘
+                    v.clearFocus()
+                    hideKeyboard(v)
+                }
+            }
+        }
+        // 必须调用父类的方法，否则整个界面的触摸事件会失效
+        return super.dispatchTouchEvent(ev)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
