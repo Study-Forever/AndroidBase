@@ -51,6 +51,11 @@ abstract class BaseRVAdapter<T, VB : ViewBinding>(
         notifyItemInserted(items.size - 1)
     }
 
+    fun updateItem(position: Int, item: T) {
+        items[position] = item
+        notifyItemChanged(position)
+    }
+
     private fun addItems(newItems: List<T>) {
         val startIndex = items.size
         items.addAll(newItems)
